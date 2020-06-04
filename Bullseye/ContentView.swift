@@ -9,12 +9,19 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State var alertIsVisible: Bool = false
+    
     var body: some View {
         VStack {
             Text("Welcome to my first app!")
                 .fontWeight(.semibold)
-            Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
+            Button(action: {self.alertIsVisible = true}) {
                 Text(/*@START_MENU_TOKEN@*/"Hit Me!"/*@END_MENU_TOKEN@*/)
+            }
+            .alert(isPresented: $alertIsVisible) {() ->
+                Alert in
+                return Alert(title: Text("Hello"), message: Text("this is my first popup"), dismissButton: .default(Text("Awesome!")))
             }
         }
     }
