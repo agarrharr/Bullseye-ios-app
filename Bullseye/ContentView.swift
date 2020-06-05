@@ -11,32 +11,56 @@ import SwiftUI
 struct ContentView: View {
     
     @State var alertIsVisible: Bool = false
-    @State var jokeIsVisible: Bool = false
+    @State var sliderValue: Double = 50
     
     var body: some View {
         VStack {
-            Text("Welcome to my first app!")
-                .fontWeight(.semibold)
-            Button(action: {self.alertIsVisible = true}) {
-                Text(/*@START_MENU_TOKEN@*/"Hit Me!"/*@END_MENU_TOKEN@*/)
+            Spacer()
+            HStack {
+                Text("Put the bullseye as close as you can to:")
+                Text("100")
             }
-            .alert(isPresented: $alertIsVisible) {() ->
-                Alert in
-                return Alert(title: Text("Hello"), message: Text("this is my first popup"), dismissButton: .default(Text("Awesome!")))
+            Spacer()
+            
+            HStack {
+                Text("1")
+                Slider(value: self.$sliderValue, in: 1...100)
+                Text("100")
             }
-            Button(action: {self.jokeIsVisible = true}) {
-                Text(/*@START_MENU_TOKEN@*/"Knock Knock"/*@END_MENU_TOKEN@*/)
+            HStack {
+                Button(action: {self.alertIsVisible = true}) {
+                    Text("Hit Me!")
+                }
+                .alert(isPresented: $alertIsVisible) {() -> Alert in
+                    return Alert(title: Text("Hello there!"), message: Text("The slider's value is \(self.sliderValue)."), dismissButton: .default(Text("Awesome!")))
+                }
             }
-            .alert(isPresented: $jokeIsVisible) {() ->
-                Alert in
-                return Alert(title: Text("Who's there?"), message: Text("Joe"), dismissButton: .default(Text("Awesome!")))
+            Spacer()
+            
+            HStack {
+                Button(action: {}) {
+                    Text("Start over")
+                }
+                Spacer()
+                Text("Score:")
+                Text("999999")
+                Spacer()
+                Text("Round:")
+                Text("999")
+                Spacer()
+                Button(action: {}) {
+                    Text("Info")
+                }
             }
+            .padding(.bottom, 20)
+            
+            // Score row
         }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView().previewLayout(.fixed(width: 896, height: 414))
     }
 }
