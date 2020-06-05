@@ -10,9 +10,10 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State var alertIsVisible: Bool = false
-    @State var sliderValue: Double = 50
-    @State var target: Int = Int.random(in: 1...100)
+    @State var alertIsVisible = false
+    @State var sliderValue = 50.0
+    @State var target = Int.random(in: 1...100)
+    @State var score = 0
     
     var body: some View {
         VStack {
@@ -29,7 +30,10 @@ struct ContentView: View {
                 Text("100")
             }
             HStack {
-                Button(action: {self.alertIsVisible = true}) {
+                Button(action: {
+                    self.alertIsVisible = true
+                    self.score += self.pointsForCurrentRound()
+                }) {
                     Text("Hit Me!")
                 }
                 .alert(isPresented: $alertIsVisible) {() -> Alert in
@@ -46,7 +50,7 @@ struct ContentView: View {
                 }
                 Spacer()
                 Text("Score:")
-                Text("999999")
+                Text("\(score)")
                 Spacer()
                 Text("Round:")
                 Text("999")
