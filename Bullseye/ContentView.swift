@@ -19,13 +19,13 @@ struct ContentView: View {
             Spacer()
             HStack {
                 Text("Put the bullseye as close as you can to:")
-                Text("\(self.target)")
+                Text("\(target)")
             }
             Spacer()
             
             HStack {
                 Text("1")
-                Slider(value: self.$sliderValue, in: 1...100)
+                Slider(value: $sliderValue, in: 1...100)
                 Text("100")
             }
             HStack {
@@ -33,10 +33,9 @@ struct ContentView: View {
                     Text("Hit Me!")
                 }
                 .alert(isPresented: $alertIsVisible) {() -> Alert in
-                    let roundedValue: Int = Int(self.sliderValue.rounded())
                     return Alert(title: Text("Hello there!"), message: Text(
-                        "The slider's value is \(roundedValue).\n" +
-                        "You scored \(self.pointsForCurrentRound()) points this round."), dismissButton: .default(Text("Awesome!")))
+                        "The slider's value is \(sliderValueRounded()).\n" +
+                        "You scored \(pointsForCurrentRound()) points this round."), dismissButton: .default(Text("Awesome!")))
                 }
             }
             Spacer()
@@ -57,13 +56,15 @@ struct ContentView: View {
                 }
             }
             .padding(.bottom, 20)
-            
-            // Score row
         }
     }
     
+    func sliderValueRounded() -> Int {
+        Int(sliderValue.rounded())
+    }
+    
     func pointsForCurrentRound() -> Int {
-        return 999
+        100 - abs(target - sliderValueRounded())
     }
 }
 
