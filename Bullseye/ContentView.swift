@@ -32,14 +32,17 @@ struct ContentView: View {
             HStack {
                 Button(action: {
                     self.alertIsVisible = true
-                    self.score += self.pointsForCurrentRound()
                 }) {
                     Text("Hit Me!")
                 }
                 .alert(isPresented: $alertIsVisible) {() -> Alert in
                     return Alert(title: Text("Hello there!"), message: Text(
                         "The slider's value is \(sliderValueRounded()).\n" +
-                        "You scored \(pointsForCurrentRound()) points this round."), dismissButton: .default(Text("Awesome!")))
+                            "You scored \(pointsForCurrentRound()) points this round."
+                    ), dismissButton: .default(Text("Awesome!")) {
+                        self.score += self.pointsForCurrentRound()
+                        self.target = Int.random(in: 1...100)
+                    })
                 }
             }
             Spacer()
