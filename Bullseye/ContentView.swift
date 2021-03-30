@@ -17,15 +17,6 @@ struct ContentView: View {
     @State var round = 1
     let midnightBlue = Color(red: 0.0 / 255/0, green: 51.0 / 255.0, blue: 102.0 / 255.0)
     
-    struct LabelStyle: ViewModifier {
-        func body(content: Content) -> some View {
-            return content
-                .foregroundColor(Color.white)
-                .font(Font.custom("Arial Rounded MT Bold", size: 18))
-                .modifier(ShadowStyle())
-        }
-    }
-    
     struct ValueStyle: ViewModifier {
         func body(content: Content) -> some View {
             return content
@@ -61,15 +52,20 @@ struct ContentView: View {
         VStack {
             Spacer()
             HStack {
-                Text("Put the bullseye as close as you can to:").modifier(LabelStyle())
+                Text("PUT THE BULLSEYE AS CLOSE AS YOU CAN TO:")
+                    .bold()
+                    .kerning(2.0)
+                    .font(.footnote)
+                    .multilineTextAlignment(.center)
+                    .lineSpacing(4.0)
                 Text("\(target)").modifier(ValueStyle())
             }
             Spacer()
             
             HStack {
-                Text("1").foregroundColor(Color.white).modifier(LabelStyle())
+                Text("1").foregroundColor(Color.white)
                 Slider(value: $sliderValue, in: 1...100)
-                Text("100").foregroundColor(Color.white).modifier(LabelStyle())
+                Text("100").foregroundColor(Color.white)
             }
             Spacer()
             HStack {
@@ -103,10 +99,10 @@ struct ContentView: View {
                 .background(Image("Button"))
                 .modifier(ShadowStyle())
                 Spacer()
-                Text("Score:").modifier(LabelStyle())
+                Text("Score:")
                 Text("\(score)").modifier(ValueStyle())
                 Spacer()
-                Text("Round:").modifier(LabelStyle())
+                Text("Round:")
                 Text("\(round)").modifier(ValueStyle())
                 Spacer()
                 NavigationLink(destination: AboutView()) {
@@ -120,7 +116,6 @@ struct ContentView: View {
             }
             .padding(.bottom, 20)
         }
-        .background(Image("Background"), alignment: .center)
         .accentColor(midnightBlue)
         .navigationBarTitle("Bullseye")
     }
