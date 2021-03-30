@@ -16,63 +16,37 @@ struct ContentView: View {
     @State var score = 0
     @State var round = 1
     let midnightBlue = Color(red: 0.0 / 255/0, green: 51.0 / 255.0, blue: 102.0 / 255.0)
-    
-    struct ValueStyle: ViewModifier {
-        func body(content: Content) -> some View {
-            return content
-                .foregroundColor(Color.yellow)
-                .font(Font.custom("Arial Rounded MT Bold", size: 24))
-                .modifier(ShadowStyle())
-        }
-    }
-    
-    struct ShadowStyle: ViewModifier {
-        func body(content: Content) -> some View {
-            return content.shadow(color: Color.black, radius: 5, x: 2, y: 2)
-        }
-    }
-    
-    struct ButtonLargeTextStyle: ViewModifier {
-        func body(content: Content) -> some View {
-            return content
-                .foregroundColor(Color.black)
-                .font(Font.custom("Arial Rounded MT Bold", size: 18))
-        }
-    }
-    
-    struct ButtonSmallTextStyle: ViewModifier {
-        func body(content: Content) -> some View {
-            return content
-                .foregroundColor(Color.black)
-                .font(Font.custom("Arial Rounded MT Bold", size: 12))
-        }
-    }
 
     var body: some View {
         VStack {
             Spacer()
-            HStack {
-                Text("PUT THE BULLSEYE AS CLOSE AS YOU CAN TO:")
+            VStack {
+                Text("🎯🎯🎯\nPUT THE BULLSEYE AS CLOSE AS YOU CAN TO")
                     .bold()
                     .kerning(2.0)
                     .font(.footnote)
                     .multilineTextAlignment(.center)
                     .lineSpacing(4.0)
-                Text("\(target)").modifier(ValueStyle())
+                Text("\(target)")
+                    .kerning(-1.0)
+                    .font(.largeTitle)
+                    .fontWeight(.black)
             }
             Spacer()
             
             HStack {
-                Text("1").foregroundColor(Color.white)
+                Text("1")
+                    .bold()
                 Slider(value: $sliderValue, in: 1...100)
-                Text("100").foregroundColor(Color.white)
+                Text("100")
+                    .bold()
             }
             Spacer()
             HStack {
                 Button(action: {
                     self.alertIsVisible = true
                 }) {
-                    Text("Hit Me!").modifier(ButtonLargeTextStyle())
+                    Text("Hit Me!")
                 }
                 .alert(isPresented: $alertIsVisible) {() -> Alert in
                     return Alert(title: Text("\(alertTitle())"), message: Text(
@@ -85,34 +59,26 @@ struct ContentView: View {
                     })
                 }
             }
-            .background(Image("Button"))
-            .modifier(ShadowStyle())
             Spacer()
             
             HStack {
                 Button(action: { self.resetGame() }) {
                     HStack {
-                        Image("StartOverIcon")
-                        Text("Start over").modifier(ButtonSmallTextStyle())
+                        Text("Start over")
                     }
                 }
-                .background(Image("Button"))
-                .modifier(ShadowStyle())
                 Spacer()
                 Text("Score:")
-                Text("\(score)").modifier(ValueStyle())
+                Text("\(score)")
                 Spacer()
                 Text("Round:")
-                Text("\(round)").modifier(ValueStyle())
+                Text("\(round)")
                 Spacer()
                 NavigationLink(destination: AboutView()) {
                     HStack {
-                        Image("InfoIcon")
-                        Text("Info").modifier(ButtonSmallTextStyle())
+                        Text("Info")
                     }
                 }
-                .background(Image("Button"))
-                .modifier(ShadowStyle())
             }
             .padding(.bottom, 20)
         }

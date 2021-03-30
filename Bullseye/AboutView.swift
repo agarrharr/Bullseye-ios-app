@@ -41,7 +41,6 @@ struct AboutView: View {
             .background(Color.init(red: 1, green: 214.0 / 255.0, blue: 179.0 / 255.0))
             .navigationBarTitle("About Bullseye")
         }
-        .background(Image("Background"))
     }
 }
 
