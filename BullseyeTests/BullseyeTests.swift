@@ -10,7 +10,6 @@ import XCTest
 @testable import Bullseye
 
 class BullseyeTests: XCTestCase {
-    
     var game: Game!
 
     override func setUpWithError() throws {
