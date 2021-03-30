@@ -14,6 +14,7 @@
 		99691E2624886785005B32DA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99691E2524886785005B32DA /* Preview Assets.xcassets */; };
 		99691E2924886785005B32DA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 99691E2724886785005B32DA /* LaunchScreen.storyboard */; };
 		99BD9CA226139AEA004BF622 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BD9CA126139AEA004BF622 /* AboutView.swift */; };
+		99BD9CAD2613D17F004BF622 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BD9CAC2613D17F004BF622 /* Game.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		99691E2824886785005B32DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		99691E2A24886785005B32DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		99BD9CA126139AEA004BF622 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
+		99BD9CAC2613D17F004BF622 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,13 +60,10 @@
 		99691E1B24886783005B32DA /* Bullseye */ = {
 			isa = PBXGroup;
 			children = (
-				99691E1C24886783005B32DA /* AppDelegate.swift */,
-				99691E1E24886783005B32DA /* SceneDelegate.swift */,
-				99691E2024886783005B32DA /* ContentView.swift */,
-				99BD9CA126139AEA004BF622 /* AboutView.swift */,
-				99691E2224886785005B32DA /* Assets.xcassets */,
+				99BD9CA92613D0DD004BF622 /* App */,
+				99BD9CA82613D0CB004BF622 /* Views */,
+				99BD9CA72613D0B6004BF622 /* Models */,
 				99691E2724886785005B32DA /* LaunchScreen.storyboard */,
-				99691E2A24886785005B32DA /* Info.plist */,
 				99691E2424886785005B32DA /* Preview Content */,
 			);
 			path = Bullseye;
@@ -76,6 +75,34 @@
 				99691E2524886785005B32DA /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		99BD9CA72613D0B6004BF622 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				99BD9CAC2613D17F004BF622 /* Game.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		99BD9CA82613D0CB004BF622 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				99691E2024886783005B32DA /* ContentView.swift */,
+				99BD9CA126139AEA004BF622 /* AboutView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		99BD9CA92613D0DD004BF622 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				99691E1C24886783005B32DA /* AppDelegate.swift */,
+				99691E1E24886783005B32DA /* SceneDelegate.swift */,
+				99691E2224886785005B32DA /* Assets.xcassets */,
+				99691E2A24886785005B32DA /* Info.plist */,
+			);
+			path = App;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -150,6 +177,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				99BD9CA226139AEA004BF622 /* AboutView.swift in Sources */,
+				99BD9CAD2613D17F004BF622 /* Game.swift in Sources */,
 				99691E1D24886783005B32DA /* AppDelegate.swift in Sources */,
 				99691E1F24886783005B32DA /* SceneDelegate.swift in Sources */,
 				99691E2124886783005B32DA /* ContentView.swift in Sources */,
@@ -294,7 +322,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Bullseye/Preview Content\"";
 				DEVELOPMENT_TEAM = 47C966XSTJ;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = Bullseye/Info.plist;
+				INFOPLIST_FILE = Bullseye/App/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -315,7 +343,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Bullseye/Preview Content\"";
 				DEVELOPMENT_TEAM = 47C966XSTJ;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = Bullseye/Info.plist;
+				INFOPLIST_FILE = Bullseye/App/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

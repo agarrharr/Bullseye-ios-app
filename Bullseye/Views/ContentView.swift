@@ -9,12 +9,11 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var game: Game = Game()
+    @State private var sliderValue = 50.0
     
     @State private var alertIsVisible = false
-    @State private var sliderValue = 50.0
-    @State private var target = Int.random(in: 1...100)
-    @State private var score = 0
-    @State private var round = 1
+
     let midnightBlue = Color(red: 0.0, green: 51.0 / 255.0, blue: 102.0 / 255.0)
 
     var body: some View {
@@ -27,7 +26,7 @@ struct ContentView: View {
                     .font(.footnote)
                     .multilineTextAlignment(.center)
                     .lineSpacing(4.0)
-                Text("\(target)")
+                Text("\(self.game.target)")
                     .kerning(-1.0)
                     .font(.largeTitle)
                     .fontWeight(.black)
@@ -50,12 +49,12 @@ struct ContentView: View {
                 }
                 .alert(isPresented: $alertIsVisible) {() -> Alert in
                     return Alert(title: Text("\(alertTitle())"), message: Text(
-                        "The slider's value is \(sliderValueRounded()).\n" +
-                            "You scored \(pointsForCurrentRound()) points this round."
+                        "The slider's value is \(self.game.sliderValueRounded(value: sliderValue)).\n" +
+                            "You scored \(self.game.points(sliderValue: sliderValue)) points this round."
                     ), dismissButton: .default(Text("Awesome!")) {
-                        self.score += self.pointsForCurrentRound()
-                        self.target = Int.random(in: 1...100)
-                        self.round += 1
+                        self.game.score += game.points(sliderValue: sliderValue)
+                        self.game.target = Int.random(in: 1...100)
+                        self.game.round += 1
                     })
                 }
             }
@@ -69,10 +68,10 @@ struct ContentView: View {
                 }
                 Spacer()
                 Text("Score:")
-                Text("\(score)")
+                Text("\(self.game.score)")
                 Spacer()
                 Text("Round:")
-                Text("\(round)")
+                Text("\(self.game.round)")
                 Spacer()
                 NavigationLink(destination: AboutView()) {
                     HStack {
@@ -86,30 +85,8 @@ struct ContentView: View {
         .navigationBarTitle("Bullseye")
     }
     
-    func sliderValueRounded() -> Int {
-        Int(sliderValue.rounded())
-    }
-    
-    func pointsForCurrentRound() -> Int {
-        let maximumScore = 100
-        let difference = amountOff()
-        let bonus: Int
-        if difference == 0 {
-            bonus = 100
-        } else if difference == 1 {
-            bonus = 50
-        } else {
-            bonus = 0
-        }
-        return maximumScore - difference + bonus
-    }
-    
-    func amountOff() -> Int {
-        abs(target - sliderValueRounded())
-    }
-    
     func alertTitle() -> String {
-        let difference = amountOff()
+        let difference = self.game.amountOff(value: sliderValue)
         let title: String
         if difference == 0 {
             title = "Perfect!"
@@ -122,16 +99,18 @@ struct ContentView: View {
     }
     
     func resetGame() -> Void {
-        sliderValue = 50.0
-        target = Int.random(in: 1...100)
-        score = 0
-        round = 1
+        self.sliderValue = 50.0
+        self.game.target = Int.random(in: 1...100)
+        self.game.score = 0
+        self.game.round = 1
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
-        ContentView().previewLayout(.fixed(width: 896, height: 414))
+        Group {
+            ContentView()
+            ContentView().previewLayout(.fixed(width: 896, height: 414))
+        }
     }
 }
