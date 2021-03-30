@@ -10,12 +10,12 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State var alertIsVisible = false
-    @State var sliderValue = 50.0
-    @State var target = Int.random(in: 1...100)
-    @State var score = 0
-    @State var round = 1
-    let midnightBlue = Color(red: 0.0 / 255/0, green: 51.0 / 255.0, blue: 102.0 / 255.0)
+    @State private var alertIsVisible = false
+    @State private var sliderValue = 50.0
+    @State private var target = Int.random(in: 1...100)
+    @State private var score = 0
+    @State private var round = 1
+    let midnightBlue = Color(red: 0.0, green: 51.0 / 255.0, blue: 102.0 / 255.0)
 
     var body: some View {
         VStack {
