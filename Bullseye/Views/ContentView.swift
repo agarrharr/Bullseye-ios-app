@@ -50,9 +50,9 @@ struct ContentView: View {
                 .alert(isPresented: $alertIsVisible) {() -> Alert in
                     return Alert(title: Text("\(alertTitle())"), message: Text(
                         "The slider's value is \(self.game.sliderValueRounded(value: sliderValue)).\n" +
-                            "You scored \(self.game.points(sliderValue: sliderValue)) points this round."
+                            "You scored \(self.game.points(sliderValue: self.game.sliderValueRounded(value: sliderValue))) points this round."
                     ), dismissButton: .default(Text("Awesome!")) {
-                        self.game.score += game.points(sliderValue: sliderValue)
+                        self.game.score += game.points(sliderValue: self.game.sliderValueRounded(value: sliderValue))
                         self.game.target = Int.random(in: 1...100)
                         self.game.round += 1
                     })
@@ -86,7 +86,7 @@ struct ContentView: View {
     }
     
     func alertTitle() -> String {
-        let difference = self.game.amountOff(value: sliderValue)
+        let difference = self.game.amountOff(value: self.game.sliderValueRounded(value: sliderValue))
         let title: String
         if difference == 0 {
             title = "Perfect!"

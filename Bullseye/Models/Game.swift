@@ -13,17 +13,18 @@ struct Game {
     var score: Int = 0
     var round: Int = 1
     
-    func points(sliderValue: Double) -> Int {
+    func points(sliderValue: Int) -> Int {
         let maximumScore = 100
         let difference = amountOff(value: sliderValue)
-        let bonus: Int
+        var bonus: Int = 0
         if difference == 0 {
             bonus = 100
-        } else if difference == 1 {
-            bonus = 50
-        } else {
-            bonus = 0
         }
+//        else if difference == 1 {
+//            bonus = 50
+//        } else {
+//            bonus = 0
+//        }
         return maximumScore - difference + bonus
     }
     
@@ -31,7 +32,7 @@ struct Game {
         Int(value.rounded())
     }
     
-    func amountOff(value: Double) -> Int {
-        abs(target - sliderValueRounded(value: value))
+    func amountOff(value: Int) -> Int {
+        abs(target - value)
     }
 }
