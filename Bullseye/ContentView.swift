@@ -71,6 +71,7 @@ struct ContentView: View {
                 Slider(value: $sliderValue, in: 1...100)
                 Text("100").foregroundColor(Color.white).modifier(LabelStyle())
             }
+            Spacer()
             HStack {
                 Button(action: {
                     self.alertIsVisible = true
@@ -169,6 +170,7 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
+        ContentView()
         ContentView().previewLayout(.fixed(width: 896, height: 414))
     }
 }
