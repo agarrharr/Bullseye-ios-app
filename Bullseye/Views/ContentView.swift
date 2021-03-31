@@ -18,9 +18,8 @@ struct ContentView: View {
 
     var body: some View {
         VStack {
-            Spacer()
             VStack {
-                Text("🎯🎯🎯\nPUT THE BULLSEYE AS CLOSE AS YOU CAN TO")
+                Text("🎯🎯🎯\nPut the bullseye as close as you can to".uppercased())
                     .bold()
                     .kerning(2.0)
                     .font(.footnote)
@@ -31,7 +30,6 @@ struct ContentView: View {
                     .font(.largeTitle)
                     .fontWeight(.black)
             }
-            Spacer()
             
             HStack {
                 Text("1")
@@ -40,13 +38,19 @@ struct ContentView: View {
                 Text("100")
                     .bold()
             }
-            Spacer()
+            
             HStack {
                 Button(action: {
                     alertIsVisible = true
                 }) {
-                    Text("Hit Me!")
+                    Text("Hit me".uppercased())
+                        .bold()
+                        .font(.body) // should be .title3, but only available
                 }
+                .padding(20.0)
+                .background(Color.blue)
+                .foregroundColor(.white)
+                .cornerRadius(8.0)
                 .alert(isPresented: $alertIsVisible, content: {
                     let roundedValue = game.sliderValueRounded(value: sliderValue);
                     
@@ -60,7 +64,7 @@ struct ContentView: View {
                     })
                 })
             }
-            Spacer()
+            .padding()
             
             HStack {
                 Button(action: { resetGame() }) {
