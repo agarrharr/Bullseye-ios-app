@@ -17,78 +17,83 @@ struct ContentView: View {
     let midnightBlue = Color(red: 0.0, green: 51.0 / 255.0, blue: 102.0 / 255.0)
 
     var body: some View {
-        VStack {
+        ZStack {
+            Color(red: 243.0 / 255.0, green: 248.0 / 255.0, blue: 253.0 / 255.0)
+                .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+
             VStack {
-                Text("🎯🎯🎯\nPut the bullseye as close as you can to".uppercased())
-                    .bold()
-                    .kerning(2.0)
-                    .font(.footnote)
-                    .multilineTextAlignment(.center)
-                    .lineSpacing(4.0)
-                Text("\(game.target)")
-                    .kerning(-1.0)
-                    .font(.largeTitle)
-                    .fontWeight(.black)
-            }
-            
-            HStack {
-                Text("1")
-                    .bold()
-                Slider(value: $sliderValue, in: 1...100)
-                Text("100")
-                    .bold()
-            }
-            
-            HStack {
-                Button(action: {
-                    alertIsVisible = true
-                }) {
-                    Text("Hit me".uppercased())
+                VStack {
+                    Text("🎯🎯🎯\nPut the bullseye as close as you can to".uppercased())
                         .bold()
-                        .font(.body) // should be .title3, but only available
+                        .kerning(2.0)
+                        .font(.footnote)
+                        .multilineTextAlignment(.center)
+                        .lineSpacing(4.0)
+                    Text("\(game.target)")
+                        .kerning(-1.0)
+                        .font(.largeTitle)
+                        .fontWeight(.black)
                 }
-                .padding(20.0)
-                .background(Color.blue)
-                .foregroundColor(.white)
-                .cornerRadius(8.0)
-                .alert(isPresented: $alertIsVisible, content: {
-                    let roundedValue = game.sliderValueRounded(value: sliderValue);
-                    
-                    return Alert(title: Text("\(alertTitle())"), message: Text(
-                        "The slider's value is \(roundedValue).\n" +
-                            "You scored \(game.points(sliderValue: roundedValue)) points this round."
-                    ), dismissButton: .default(Text("Awesome!")) {
-                        game.score += game.points(sliderValue: game.sliderValueRounded(value: sliderValue))
-                        game.target = Int.random(in: 1...100)
-                        game.round += 1
+                
+                HStack {
+                    Text("1")
+                        .bold()
+                    Slider(value: $sliderValue, in: 1...100)
+                    Text("100")
+                        .bold()
+                }
+                
+                HStack {
+                    Button(action: {
+                        alertIsVisible = true
+                    }) {
+                        Text("Hit me".uppercased())
+                            .bold()
+                            .font(.body) // should be .title3, but only available
+                    }
+                    .padding(20.0)
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(8.0)
+                    .alert(isPresented: $alertIsVisible, content: {
+                        let roundedValue = game.sliderValueRounded(value: sliderValue);
+                        
+                        return Alert(title: Text("\(alertTitle())"), message: Text(
+                            "The slider's value is \(roundedValue).\n" +
+                                "You scored \(game.points(sliderValue: roundedValue)) points this round."
+                        ), dismissButton: .default(Text("Awesome!")) {
+                            game.score += game.points(sliderValue: game.sliderValueRounded(value: sliderValue))
+                            game.target = Int.random(in: 1...100)
+                            game.round += 1
+                        })
                     })
-                })
+                }
+                
+                HStack {
+                    Button(action: { resetGame() }) {
+                        HStack {
+                            Text("Start over")
+                        }
+                    }
+                    Spacer()
+                    Text("Score:")
+                    Text("\(game.score)")
+                    Spacer()
+                    Text("Round:")
+                    Text("\(game.round)")
+                    Spacer()
+                    NavigationLink(destination: AboutView()) {
+                        HStack {
+                            Text("Info")
+                        }
+                    }
+                }
+                .padding(.bottom, 20)
             }
+            .accentColor(midnightBlue)
+            .navigationBarTitle("Bullseye")
             .padding()
-            
-            HStack {
-                Button(action: { resetGame() }) {
-                    HStack {
-                        Text("Start over")
-                    }
-                }
-                Spacer()
-                Text("Score:")
-                Text("\(game.score)")
-                Spacer()
-                Text("Round:")
-                Text("\(game.round)")
-                Spacer()
-                NavigationLink(destination: AboutView()) {
-                    HStack {
-                        Text("Info")
-                    }
-                }
-            }
-            .padding(.bottom, 20)
         }
-        .accentColor(midnightBlue)
-        .navigationBarTitle("Bullseye")
     }
     
     func alertTitle() -> String {
