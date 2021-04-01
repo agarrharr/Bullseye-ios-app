@@ -24,31 +24,6 @@ struct ContentView: View {
                 Instructions(game: $game)
                 SliderView(sliderValue: $sliderValue)
                 HitMeButton(game: $game, alertIsVisible: $alertIsVisible, sliderValue: $sliderValue)
-                
-                HStack {
-                    Button(action: { resetGame() }) {
-                        HStack {
-                            Text("Start over")
-                        }
-                    }
-                    Spacer()
-                    Text("Score:")
-                        .foregroundColor(Color("TextColor"))
-                    Text("\(game.score)")
-                        .foregroundColor(Color("TextColor"))
-                    Spacer()
-                    Text("Round:")
-                        .foregroundColor(Color("TextColor"))
-                    Text("\(game.round)")
-                        .foregroundColor(Color("TextColor"))
-                    Spacer()
-                    NavigationLink(destination: AboutView()) {
-                        HStack {
-                            Text("Info")
-                        }
-                    }
-                }
-                .padding(.bottom, 20)
             }
             .accentColor(Color("AccentColor")) // I shouldn't have to do this?
             .navigationBarTitle("Bullseye")
@@ -92,7 +67,7 @@ struct ContentView: View {
             }) {
                 Text("Hit me".uppercased())
                     .bold()
-                    .font(.body) // should be .title3, but only available
+                    .font(.body) // should be .title3, but only available on iOS 14+
             }
             .padding(20.0)
             .background(

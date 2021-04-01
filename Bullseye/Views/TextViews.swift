@@ -37,11 +37,23 @@ struct SliderLabelText: View {
     var text: String
     
     var body: some View {
-        HStack {
-            Text(text)
-                .foregroundColor(Color("TextColor"))
-                .bold()
-        }
+        Text(text)
+            .bold()
+            .foregroundColor(Color("TextColor"))
+            .frame(width: 35.0)
+        
+    }
+}
+
+struct LabelText: View {
+    var text: String
+    
+    var body: some View {
+        Text(text)
+            .bold()
+            .foregroundColor(Color("TextColor"))
+            .kerning(1.5)
+            .font(.caption)
     }
 }
 
@@ -51,6 +63,7 @@ struct TextViews_Previews: PreviewProvider {
             InstructionText()
             BigNumberText(number: "99")
             SliderLabelText(text: "1")
+            LabelText(text: "9")
         }
     }
 }
