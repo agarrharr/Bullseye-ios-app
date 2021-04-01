@@ -22,13 +22,13 @@ struct ContentView: View {
 
             VStack {
                 Instructions(game: $game)
-                SliderView(sliderValue: $sliderValue)
+                    .padding(.bottom, 100)
                 HitMeButton(game: $game, alertIsVisible: $alertIsVisible, sliderValue: $sliderValue)
             }
-            .accentColor(Color("AccentColor")) // I shouldn't have to do this?
-            .navigationBarTitle("Bullseye")
-            .padding()
+
+            SliderView(sliderValue: $sliderValue)
         }
+        .accentColor(Color("AccentColor")) // I shouldn't have to do this?
     }
     
     struct Instructions: View {
