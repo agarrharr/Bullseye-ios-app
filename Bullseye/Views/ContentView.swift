@@ -70,18 +70,6 @@ struct ContentView: View {
         }
     }
     
-    struct SliderLabelText: View {
-        var text: String
-        
-        var body: some View {
-            HStack {
-                Text(text)
-                    .foregroundColor(Color("TextColor"))
-                    .bold()
-            }
-        }
-    }
-    
     struct SliderView: View {
         @Binding var sliderValue: Double
         
@@ -117,6 +105,10 @@ struct ContentView: View {
             )
             .foregroundColor(.white)
             .cornerRadius(8.0)
+            .overlay(
+                RoundedRectangle(cornerRadius: 8.0)
+                    .strokeBorder(Color.white, lineWidth: 2.0)
+            )
             .alert(isPresented: $alertIsVisible, content: {
                 let roundedValue = game.sliderValueRounded(value: sliderValue);
                 
