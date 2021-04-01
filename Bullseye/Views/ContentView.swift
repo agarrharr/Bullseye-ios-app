@@ -18,56 +18,13 @@ struct ContentView: View {
 
     var body: some View {
         ZStack {
-            Color(red: 243.0 / 255.0, green: 248.0 / 255.0, blue: 253.0 / 255.0)
+            Color("BackgroundColor")
                 .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
 
             VStack {
-                VStack {
-                    Text("🎯🎯🎯\nPut the bullseye as close as you can to".uppercased())
-                        .bold()
-                        .kerning(2.0)
-                        .font(.footnote)
-                        .multilineTextAlignment(.center)
-                        .lineSpacing(4.0)
-                    Text("\(game.target)")
-                        .kerning(-1.0)
-                        .font(.largeTitle)
-                        .fontWeight(.black)
-                }
-                
-                HStack {
-                    Text("1")
-                        .bold()
-                    Slider(value: $sliderValue, in: 1...100)
-                    Text("100")
-                        .bold()
-                }
-                
-                HStack {
-                    Button(action: {
-                        alertIsVisible = true
-                    }) {
-                        Text("Hit me".uppercased())
-                            .bold()
-                            .font(.body) // should be .title3, but only available
-                    }
-                    .padding(20.0)
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(8.0)
-                    .alert(isPresented: $alertIsVisible, content: {
-                        let roundedValue = game.sliderValueRounded(value: sliderValue);
-                        
-                        return Alert(title: Text("\(alertTitle())"), message: Text(
-                            "The slider's value is \(roundedValue).\n" +
-                                "You scored \(game.points(sliderValue: roundedValue)) points this round."
-                        ), dismissButton: .default(Text("Awesome!")) {
-                            game.score += game.points(sliderValue: game.sliderValueRounded(value: sliderValue))
-                            game.target = Int.random(in: 1...100)
-                            game.round += 1
-                        })
-                    })
-                }
+                Instructions(game: $game)
+                SliderView(sliderValue: $sliderValue)
+                HitMeButton(game: $game, alertIsVisible: $alertIsVisible, sliderValue: $sliderValue)
                 
                 HStack {
                     Button(action: { resetGame() }) {
@@ -77,10 +34,14 @@ struct ContentView: View {
                     }
                     Spacer()
                     Text("Score:")
+                        .foregroundColor(Color("TextColor"))
                     Text("\(game.score)")
+                        .foregroundColor(Color("TextColor"))
                     Spacer()
                     Text("Round:")
+                        .foregroundColor(Color("TextColor"))
                     Text("\(game.round)")
+                        .foregroundColor(Color("TextColor"))
                     Spacer()
                     NavigationLink(destination: AboutView()) {
                         HStack {
@@ -90,23 +51,85 @@ struct ContentView: View {
                 }
                 .padding(.bottom, 20)
             }
-            .accentColor(midnightBlue)
+            .accentColor(Color("AccentColor")) // I shouldn't have to do this?
             .navigationBarTitle("Bullseye")
             .padding()
         }
     }
     
-    func alertTitle() -> String {
-        let difference = game.amountOff(value: game.sliderValueRounded(value: sliderValue))
-        let title: String
-        if difference == 0 {
-            title = "Perfect!"
-        } else if  difference < 5 {
-            title = "Not bad."
-        } else {
-            title = "Are you even trying?"
+    struct Instructions: View {
+        @Binding var game: Game
+        
+        var body: some View {
+            VStack {
+                InstructionText()
+                    .padding(.leading, 30.0)
+                    .padding(.trailing, 30.0)
+                BigNumberText(number: "\(game.target)")
+            }
         }
-        return title
+    }
+    
+    struct SliderLabelText: View {
+        var text: String
+        
+        var body: some View {
+            HStack {
+                Text(text)
+                    .foregroundColor(Color("TextColor"))
+                    .bold()
+            }
+        }
+    }
+    
+    struct SliderView: View {
+        @Binding var sliderValue: Double
+        
+        var body: some View {
+            HStack {
+                SliderLabelText(text: "1")
+                Slider(value: $sliderValue, in: 1...100)
+                SliderLabelText(text: "100")
+            }
+        }
+    }
+    
+    struct HitMeButton: View {
+        @Binding var game: Game
+        @Binding var alertIsVisible: Bool
+        @Binding var sliderValue: Double
+        
+        var body: some View {
+            Button(action: {
+                alertIsVisible = true
+            }) {
+                Text("Hit me".uppercased())
+                    .bold()
+                    .font(.body) // should be .title3, but only available
+            }
+            .padding(20.0)
+            .background(
+                ZStack {
+                    Color("ButtonColor")
+                    LinearGradient(gradient: Gradient(colors: [Color.white.opacity(0.3), Color.clear]), startPoint: .top, endPoint: .bottom)
+                    
+                }
+            )
+            .foregroundColor(.white)
+            .cornerRadius(8.0)
+            .alert(isPresented: $alertIsVisible, content: {
+                let roundedValue = game.sliderValueRounded(value: sliderValue);
+                
+                return Alert(title: Text(game.alertTitle(sliderValue: sliderValue)), message: Text(
+                    "The slider's value is \(roundedValue).\n" +
+                        "You scored \(game.points(sliderValue: roundedValue)) points this round."
+                ), dismissButton: .default(Text("Awesome!")) {
+                    game.score += game.points(sliderValue: game.sliderValueRounded(value: sliderValue))
+                    game.target = Int.random(in: 1...100)
+                    game.round += 1
+                })
+            })
+        }
     }
     
     func resetGame() -> Void {
@@ -122,6 +145,10 @@ struct ContentView_Previews: PreviewProvider {
         Group {
             ContentView()
             ContentView().previewLayout(.fixed(width: 896, height: 414))
+            ContentView()
+                .preferredColorScheme(.dark)
+            ContentView().previewLayout(.fixed(width: 896, height: 414))
+                .preferredColorScheme(.dark)
         }
     }
 }

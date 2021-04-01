@@ -35,4 +35,18 @@ struct Game {
     func amountOff(value: Int) -> Int {
         abs(target - value)
     }
+    
+    func alertTitle(sliderValue: Double) -> String {
+        let difference = amountOff(value: sliderValueRounded(value: sliderValue))
+
+        let title: String
+        if difference == 0 {
+            title = "Perfect!"
+        } else if  difference < 5 {
+            title = "Not bad."
+        } else {
+            title = "Are you even trying?"
+        }
+        return title
+    }
 }

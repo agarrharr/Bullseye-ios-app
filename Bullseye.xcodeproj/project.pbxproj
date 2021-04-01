@@ -13,6 +13,7 @@
 		99691E2324886785005B32DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99691E2224886785005B32DA /* Assets.xcassets */; };
 		99691E2624886785005B32DA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99691E2524886785005B32DA /* Preview Assets.xcassets */; };
 		99691E2924886785005B32DA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 99691E2724886785005B32DA /* LaunchScreen.storyboard */; };
+		99B7F284261513A4009EF2A4 /* TextViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B7F283261513A4009EF2A4 /* TextViews.swift */; };
 		99BD9CA226139AEA004BF622 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BD9CA126139AEA004BF622 /* AboutView.swift */; };
 		99BD9CAD2613D17F004BF622 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BD9CAC2613D17F004BF622 /* Game.swift */; };
 		99BD9CB62613D92C004BF622 /* BullseyeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BD9CB52613D92C004BF622 /* BullseyeTests.swift */; };
@@ -37,6 +38,7 @@
 		99691E2524886785005B32DA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		99691E2824886785005B32DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		99691E2A24886785005B32DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		99B7F283261513A4009EF2A4 /* TextViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViews.swift; sourceTree = "<group>"; };
 		99BD9CA126139AEA004BF622 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		99BD9CAC2613D17F004BF622 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		99BD9CB32613D92C004BF622 /* BullseyeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BullseyeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -113,6 +115,7 @@
 			children = (
 				99691E2024886783005B32DA /* ContentView.swift */,
 				99BD9CA126139AEA004BF622 /* AboutView.swift */,
+				99B7F283261513A4009EF2A4 /* TextViews.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -243,6 +246,7 @@
 				99691E1D24886783005B32DA /* AppDelegate.swift in Sources */,
 				99691E1F24886783005B32DA /* SceneDelegate.swift in Sources */,
 				99691E2124886783005B32DA /* ContentView.swift in Sources */,
+				99B7F284261513A4009EF2A4 /* TextViews.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
