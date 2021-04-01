@@ -32,7 +32,7 @@ struct Game {
         Int(value.rounded())
     }
     
-    func amountOff(value: Int) -> Int {
+    private func amountOff(value: Int) -> Int {
         abs(target - value)
     }
     
@@ -48,5 +48,11 @@ struct Game {
             title = "Are you even trying?"
         }
         return title
+    }
+    
+    mutating func startNewRound(points: Int) {
+        score += points
+        // target = Int.random(in: 1...100)
+        round += 1
     }
 }
