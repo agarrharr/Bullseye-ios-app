@@ -96,13 +96,6 @@ struct ContentView: View {
             })
         }
     }
-    
-    func resetGame() -> Void {
-        sliderValue = 50.0
-        game.target = Int.random(in: 1...100)
-        game.score = 0
-        game.round = 1
-    }
 }
 
 struct ContentView_Previews: PreviewProvider {
