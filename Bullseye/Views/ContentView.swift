@@ -85,14 +85,13 @@ struct ContentView: View {
             )
             .alert(isPresented: $alertIsVisible, content: {
                 let roundedValue = game.sliderValueRounded(value: sliderValue);
+                let points = game.points(sliderValue: roundedValue)
                 
                 return Alert(title: Text(game.alertTitle(sliderValue: sliderValue)), message: Text(
                     "The slider's value is \(roundedValue).\n" +
-                        "You scored \(game.points(sliderValue: roundedValue)) points this round."
+                        "You scored \(points) points this round."
                 ), dismissButton: .default(Text("Awesome!")) {
-                    game.score += game.points(sliderValue: game.sliderValueRounded(value: sliderValue))
-                    game.target = Int.random(in: 1...100)
-                    game.round += 1
+                    game.startNewRound(points: points)
                 })
             })
         }
