@@ -9,8 +9,10 @@
 import SwiftUI
 
 struct InstructionText: View {
+    var text: String
+    
     var body: some View {
-        Text("🎯🎯🎯\nPut the bullseye as close as you can to".uppercased())
+        Text(text.uppercased())
             .bold()
             .kerning(2.0)
             .multilineTextAlignment(.center)
@@ -57,13 +59,42 @@ struct LabelText: View {
     }
 }
 
+struct BodyText: View {
+    var text: String
+    
+    var body: some View {
+        Text(text)
+            .font(.subheadline)
+            .fontWeight(.semibold)
+            .multilineTextAlignment(.center)
+            .lineSpacing(12.0)
+    }
+}
+
+struct ButtonText: View {
+    var text: String
+    
+    var body: some View {
+        Text(text)
+            .bold()
+            .foregroundColor(.white)
+            .padding()
+            .frame(maxWidth: .infinity)
+            .background(Color("AccentColor")) // I should be able to do Color.accentColor
+            .cornerRadius(12.0)
+    }
+}
+
 struct TextViews_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            InstructionText()
+            InstructionText(text: "Instructions")
             BigNumberText(number: "99")
             SliderLabelText(text: "1")
             LabelText(text: "9")
+            BodyText(text: "You scored 200 Points\n🎉🎉🎉")
+            ButtonText(text: "Start New Round")
         }
+        .padding()
     }
 }
