@@ -44,13 +44,28 @@ struct RoundedRectTextView: View {
         Text(text)
             .kerning(-0.2)
             .bold()
-            .font(.body) // should be .title3, but only available on iOS 14+
+            .font(.title3)
             .frame(width: Constants.General.roundedRectViewWidth, height: Constants.General.roundedRectViewHeight)
             .foregroundColor(Color("TextColor"))
             .overlay(
-                RoundedRectangle(cornerRadius: Constants.General.roundRectCornerRadius)
+                RoundedRectangle(cornerRadius: 21.0)
                     .strokeBorder(lineWidth: Constants.General.strokeWidth)
                     .foregroundColor(Color("ButtonStrokeColor"))
+            )
+
+    }
+}
+
+struct RoundedTextView: View {
+    var text: String
+    
+    var body: some View {
+        Text(text)
+            .font(.title)
+            .foregroundColor(Color("TextColor"))
+            .frame(width: Constants.General.roundedViewLength, height: Constants.General.roundedViewLength)
+            .overlay(
+                Circle().strokeBorder(Color("LeaderboardRowColor"), lineWidth: Constants.General.strokeWidth)
             )
 
     }
@@ -62,6 +77,7 @@ struct PreviewView: View {
             RoundedImageViewStroked(systemName: "arrow.counterclockwise")
             RoundedImageViewFilled(systemName: "list.dash")
             RoundedRectTextView(text: "100")
+            RoundedTextView(text: "100")
         }
     }
 }

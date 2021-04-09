@@ -76,7 +76,7 @@ struct ContentView: View {
             }) {
                 Text("Hit me".uppercased())
                     .bold()
-                    .font(.body) // should be .title3, but only available on iOS 14+
+                    .font(.title3)
             }
             .padding(20.0)
             .background(

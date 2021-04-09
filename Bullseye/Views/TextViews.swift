@@ -80,8 +80,45 @@ struct ButtonText: View {
             .foregroundColor(.white)
             .padding()
             .frame(maxWidth: .infinity)
-            .background(Color("AccentColor")) // I should be able to do Color.accentColor
+            .background(Color.accentColor)
             .cornerRadius(12.0)
+    }
+}
+
+struct ScoreText: View {
+    var score: Int
+    
+    var body: some View {
+        Text(String(score))
+            .bold()
+            .kerning(-0.2)
+            .foregroundColor(Color("TextColor"))
+            .font(.title3)
+
+    }
+}
+
+struct DateText: View {
+    var date: Date
+    
+    var body: some View {
+        Text(date, style: .time)
+            .bold()
+            .kerning(-0.2)
+            .foregroundColor(Color("TextColor"))
+            .font(.title3)
+    }
+}
+
+struct BigBoldText: View {
+    var text: String
+    
+    var body: some View {
+        Text(text.uppercased())
+            .kerning(2.0)
+            .foregroundColor(Color("TextColor"))
+            .font(.title)
+            .fontWeight(.black)
     }
 }
 
@@ -94,6 +131,9 @@ struct TextViews_Previews: PreviewProvider {
             LabelText(text: "9")
             BodyText(text: "You scored 200 Points\n🎉🎉🎉")
             ButtonText(text: "Start New Round")
+            ScoreText(score: 599)
+            DateText(date: Date())
+            BigBoldText(text: "Leaderboard")
         }
         .padding()
     }
