@@ -13,8 +13,6 @@ struct ContentView: View {
     @State private var sliderValue = 50.0
     @State private var alertIsVisible = false
 
-    let midnightBlue = Color(red: 0.0, green: 51.0 / 255.0, blue: 102.0 / 255.0)
-
     var body: some View {
         ZStack {
             BackgroundView(game: $game)
