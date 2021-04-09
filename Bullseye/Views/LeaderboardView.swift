@@ -10,6 +10,7 @@ import SwiftUI
 
 struct LeaderboardView: View {
     @Binding var leaderboardIsShown: Bool
+    @Binding var game: Game
     
     var body: some View {
         ZStack {
@@ -18,7 +19,14 @@ struct LeaderboardView: View {
             VStack(spacing: 10) {
                 HeaderView(leaderboardIsShown: $leaderboardIsShown)
                 LabelView()
-                RowView(index: 1, score: 10, date: Date())
+                ScrollView {
+                    VStack(spacing: 10) {
+                        ForEach(game.leaderboardEntries.indices) { i in
+                            let leaderboardEntry = game.leaderboardEntries[i]
+                            RowView(index: i, score: leaderboardEntry.score, date: leaderboardEntry.date)
+                        }
+                    }
+                }
             }
         }
     }
@@ -66,6 +74,7 @@ struct HeaderView: View {
                     BigBoldText(text: "Leaderboard")
                 }
             }
+            .padding(.top)
             HStack {
                 Spacer()
                 Button(action: {
@@ -75,6 +84,7 @@ struct HeaderView: View {
                         .padding(.trailing)
                 }
             }
+            .padding(.top)
         }
     }
 }
@@ -100,15 +110,16 @@ struct LabelView: View {
 
 struct LeaderboardView_Previews: PreviewProvider {
     static private var leaderboardIsShown = Binding.constant(false)
+    static private var game = Binding.constant(Game(loadTestData: true))
     
     static var previews: some View {
-        LeaderboardView(leaderboardIsShown: leaderboardIsShown)
+        LeaderboardView(leaderboardIsShown: leaderboardIsShown, game: game)
             .previewDevice("iPhone 7")
-        LeaderboardView(leaderboardIsShown: leaderboardIsShown)
+        LeaderboardView(leaderboardIsShown: leaderboardIsShown, game: game)
             .previewLayout(.fixed(width: 896, height: 414))
-        LeaderboardView(leaderboardIsShown: leaderboardIsShown)
+        LeaderboardView(leaderboardIsShown: leaderboardIsShown, game: game)
             .preferredColorScheme(.dark)
-        LeaderboardView(leaderboardIsShown: leaderboardIsShown)
+        LeaderboardView(leaderboardIsShown: leaderboardIsShown, game: game)
             .previewLayout(.fixed(width: 896, height: 414))
             .preferredColorScheme(.dark)
     }
