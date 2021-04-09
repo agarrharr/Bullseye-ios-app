@@ -90,7 +90,7 @@ struct ContentView: View {
             .cornerRadius(8.0)
             .overlay(
                 RoundedRectangle(cornerRadius: 8.0)
-                    .strokeBorder(Color.white, lineWidth: 2.0)
+                    .strokeBorder(Color.white, lineWidth: Constants.General.strokeWidth)
             )
         }
     }

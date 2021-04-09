@@ -15,9 +15,9 @@ struct RoundedImageViewStroked: View {
         Image(systemName: systemName)
             .font(.title)
             .foregroundColor(Color("TextColor"))
-            .frame(width: 56.0, height: 56.0)
+            .frame(width: Constants.General.roundedViewLength, height: Constants.General.roundedViewLength)
             .overlay(
-                Circle().strokeBorder(Color("ButtonStrokeColor"), lineWidth: 2.0)
+                Circle().strokeBorder(Color("ButtonStrokeColor"), lineWidth: Constants.General.strokeWidth)
             )
     }
 }
@@ -29,7 +29,7 @@ struct RoundedImageViewFilled: View {
         Image(systemName: systemName)
             .font(.title)
             .foregroundColor(Color("ButtonFilledTextColor"))
-            .frame(width: 56.0, height: 56.0)
+            .frame(width: Constants.General.roundedViewLength, height: Constants.General.roundedViewLength)
             .background(
                 Circle()
                     .fill(Color("ButtonFilledBackgroundColor"))
@@ -45,11 +45,11 @@ struct RoundedRectTextView: View {
             .kerning(-0.2)
             .bold()
             .font(.body) // should be .title3, but only available on iOS 14+
-            .frame(width: 68.0, height: 56.0)
+            .frame(width: Constants.General.roundedRectViewWidth, height: Constants.General.roundedRectViewHeight)
             .foregroundColor(Color("TextColor"))
             .overlay(
-                RoundedRectangle(cornerRadius: 21.0)
-                    .strokeBorder(lineWidth: 2.0)
+                RoundedRectangle(cornerRadius: Constants.General.roundRectCornerRadius)
+                    .strokeBorder(lineWidth: Constants.General.strokeWidth)
                     .foregroundColor(Color("ButtonStrokeColor"))
             )
 
