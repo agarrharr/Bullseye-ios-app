@@ -9,12 +9,14 @@
 import SwiftUI
 
 struct LeaderboardView: View {
+    @Binding var leaderboardIsShown: Bool
+    
     var body: some View {
         ZStack {
             Color("BackgroundColor")
                 .edgesIgnoringSafeArea(.all)
             VStack(spacing: 10) {
-                HeaderView()
+                HeaderView(leaderboardIsShown: $leaderboardIsShown)
                 LabelView()
                 RowView(index: 1, score: 10, date: Date())
             }
@@ -49,6 +51,7 @@ struct RowView: View {
 }
 
 struct HeaderView: View {
+    @Binding var leaderboardIsShown: Bool
     @Environment(\.verticalSizeClass) var verticalSizeClass
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     
@@ -65,7 +68,9 @@ struct HeaderView: View {
             }
             HStack {
                 Spacer()
-                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
+                Button(action: {
+                    leaderboardIsShown = false
+                }) {
                     RoundedImageViewFilled(systemName: "xmark")
                         .padding(.trailing)
                 }
@@ -94,13 +99,17 @@ struct LabelView: View {
 }
 
 struct LeaderboardView_Previews: PreviewProvider {
+    static private var leaderboardIsShown = Binding.constant(false)
+    
     static var previews: some View {
-        LeaderboardView()
+        LeaderboardView(leaderboardIsShown: leaderboardIsShown)
             .previewDevice("iPhone 7")
-        LeaderboardView().previewLayout(.fixed(width: 896, height: 414))
-        LeaderboardView()
+        LeaderboardView(leaderboardIsShown: leaderboardIsShown)
+            .previewLayout(.fixed(width: 896, height: 414))
+        LeaderboardView(leaderboardIsShown: leaderboardIsShown)
             .preferredColorScheme(.dark)
-        LeaderboardView().previewLayout(.fixed(width: 896, height: 414))
+        LeaderboardView(leaderboardIsShown: leaderboardIsShown)
+            .previewLayout(.fixed(width: 896, height: 414))
             .preferredColorScheme(.dark)
     }
 }
